@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="oracle配置监听 复制编辑响应文件  123cp &#x2F;tmp&#x2F;database&#x2F;response&#x2F;netca.rsp &#x2F;data&#x2F;app&#x2F;dbabd_netca.rsp -rased -i &#39;s&#x2F;^#.*$&#x2F;&#x2F;g&#39; &#x2F;data&#x2F;app&#x2F;dbabd_ne">
+<meta property="og:type" content="article">
+<meta property="og:title" content="oracle创建实例">
+<meta property="og:url" content="https://iamtcs.github.io/2020/08/19/oracle%E5%88%9B%E5%BB%BA%E5%AE%9E%E4%BE%8B/index.html">
+<meta property="og:site_name" content="个人博客">
+<meta property="og:description" content="oracle配置监听 复制编辑响应文件  123cp &#x2F;tmp&#x2F;database&#x2F;response&#x2F;netca.rsp &#x2F;data&#x2F;app&#x2F;dbabd_netca.rsp -rased -i &#39;s&#x2F;^#.*$&#x2F;&#x2F;g&#39; &#x2F;data&#x2F;app&#x2F;dbabd_ne">
+<meta property="og:image" content="https://iamtcs.github.io/2020/08/19/oracle%E5%88%9B%E5%BB%BA%E5%AE%9E%E4%BE%8B/img/3.4.png">
+<meta property="og:image" content="https://iamtcs.github.io/2020/08/19/oracle%E5%88%9B%E5%BB%BA%E5%AE%9E%E4%BE%8B/img/3.5.png">
+<meta property="og:image" content="https://iamtcs.github.io/2020/08/19/oracle%E5%88%9B%E5%BB%BA%E5%AE%9E%E4%BE%8B/img/3.6.png">
+<meta property="og:image" content="https://iamtcs.github.io/2020/08/19/oracle%E5%88%9B%E5%BB%BA%E5%AE%9E%E4%BE%8B/img/3.7.png">
+<meta property="og:image" content="https://iamtcs.github.io/2020/08/19/oracle%E5%88%9B%E5%BB%BA%E5%AE%9E%E4%BE%8B/img/3.8.png">
+<meta property="og:image" content="https://iamtcs.github.io/2020/08/19/oracle%E5%88%9B%E5%BB%BA%E5%AE%9E%E4%BE%8B/img/3.9.png">
+<meta property="og:image" content="https://iamtcs.github.io/2020/08/19/oracle%E5%88%9B%E5%BB%BA%E5%AE%9E%E4%BE%8B/img/3.10.png">
+<meta property="og:image" content="https://iamtcs.github.io/2020/08/19/oracle%E5%88%9B%E5%BB%BA%E5%AE%9E%E4%BE%8B/img/2.1.png">
+<meta property="og:image" content="https://iamtcs.github.io/2020/08/19/oracle%E5%88%9B%E5%BB%BA%E5%AE%9E%E4%BE%8B/img/2.4.png">
+<meta property="og:image" content="https://iamtcs.github.io/2020/08/19/oracle%E5%88%9B%E5%BB%BA%E5%AE%9E%E4%BE%8B/img/2.3.png">
+<meta property="og:image" content="https://iamtcs.github.io/2020/08/19/oracle%E5%88%9B%E5%BB%BA%E5%AE%9E%E4%BE%8B/img/2.2.png">
+<meta property="og:image" content="https://iamtcs.github.io/2020/08/19/oracle%E5%88%9B%E5%BB%BA%E5%AE%9E%E4%BE%8B/img/2.5.png">
+<meta property="og:image" content="https://iamtcs.github.io/2020/08/19/oracle%E5%88%9B%E5%BB%BA%E5%AE%9E%E4%BE%8B/img/2.6.png">
+<meta property="og:image" content="https://iamtcs.github.io/2020/08/19/oracle%E5%88%9B%E5%BB%BA%E5%AE%9E%E4%BE%8B/img/3.1.png">
+<meta property="og:image" content="https://iamtcs.github.io/2020/08/19/oracle%E5%88%9B%E5%BB%BA%E5%AE%9E%E4%BE%8B/img/3.2.png">
+<meta property="og:image" content="https://iamtcs.github.io/2020/08/19/oracle%E5%88%9B%E5%BB%BA%E5%AE%9E%E4%BE%8B/img/3.3.png">
+<meta property="article:published_time" content="2020-08-19T06:21:08.285Z">
+<meta property="article:modified_time" content="2019-11-11T06:53:43.368Z">
+<meta property="article:author" content="淡竹浓啡">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://iamtcs.github.io/2020/08/19/oracle%E5%88%9B%E5%BB%BA%E5%AE%9E%E4%BE%8B/img/3.4.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://iamtcs.github.io/2020/08/19/oracle创建实例/"/>
+
+
+
+
+
+  <title>oracle创建实例 | 个人博客</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://iamtcs.github.io/2020/08/19/oracle%E5%88%9B%E5%BB%BA%E5%AE%9E%E4%BE%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="淡竹浓啡">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/%E5%BE%AE%E4%BF%A1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">oracle创建实例</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-08-19T14:21:08+08:00">
+                2020-08-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="oracle配置监听"><a href="#oracle配置监听" class="headerlink" title="oracle配置监听"></a>oracle配置监听</h2><ul>
+<li>复制编辑响应文件</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cp &#x2F;tmp&#x2F;database&#x2F;response&#x2F;netca.rsp &#x2F;data&#x2F;app&#x2F;dbabd_netca.rsp -ra</span><br><span class="line">sed -i &#39;s&#x2F;^#.*$&#x2F;&#x2F;g&#39; &#x2F;data&#x2F;app&#x2F;dbabd_netca.rsp</span><br><span class="line">sed -i &#39;&#x2F;^$&#x2F;d&#39; &#x2F;data&#x2F;app&#x2F;dbabd_netca.rsp</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>文件dbabd_netca.rsp修改后如下</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[GENERAL]</span><br><span class="line">RESPONSEFILE_VERSION&#x3D;&quot;11.2&quot;</span><br><span class="line">CREATE_TYPE&#x3D;&quot;CUSTOM&quot;</span><br><span class="line">[oracle.net.ca]</span><br><span class="line">INSTALLED_COMPONENTS&#x3D;&#123;&quot;server&quot;,&quot;net8&quot;,&quot;javavm&quot;&#125;</span><br><span class="line">INSTALL_TYPE&#x3D;&quot;&quot;typical&quot;&quot;</span><br><span class="line">LISTENER_NUMBER&#x3D;1</span><br><span class="line">LISTENER_NAMES&#x3D;&#123;&quot;LISTENER&quot;&#125;        # 监听名称</span><br><span class="line">LISTENER_PROTOCOLS&#x3D;&#123;&quot;TCP;1521&quot;&#125;    # 监听端口</span><br><span class="line">LISTENER_START&#x3D;&quot;&quot;LISTENER&quot;&quot;</span><br><span class="line">NAMING_METHODS&#x3D;&#123;&quot;TNSNAMES&quot;,&quot;ONAMES&quot;,&quot;HOSTNAME&quot;&#125;</span><br><span class="line">NSN_NUMBER&#x3D;1</span><br><span class="line">NSN_NAMES&#x3D;&#123;&quot;EXTPROC_CONNECTION_DATA&quot;&#125;</span><br><span class="line">NSN_SERVICE&#x3D;&#123;&quot;PLSExtProc&quot;&#125;</span><br><span class="line">NSN_PROTOCOLS&#x3D;&#123;&quot;TCP;HOSTNAME;1521&quot;&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>静默配置监听</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">su - oracle</span><br><span class="line">$ORACLE_HOME&#x2F;bin&#x2F;netca &#x2F;silent &#x2F;responsefile &#x2F;data&#x2F;app&#x2F;dbabd_netca.rsp      #要带$</span><br><span class="line">lsnrctl status</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>修改监听器配置文件 listener.ora和tnsnames.ora代码：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">su - oracle</span><br><span class="line">cd $ORACLE_HOME&#x2F;network&#x2F;admin&#x2F;</span><br><span class="line">vi listener.ora</span><br><span class="line">vi tnsnames.ora</span><br></pre></td></tr></table></figure>
+
+<p>listenner.ora的内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"># listener.ora Network Configuration File: &#x2F;data&#x2F;app&#x2F;oracle&#x2F;product&#x2F;11.2.0&#x2F;db_1&#x2F;network&#x2F;admin&#x2F;listener.ora</span><br><span class="line"># Generated by Oracle configuration tools.</span><br><span class="line"></span><br><span class="line">LISTENER &#x3D;</span><br><span class="line">  (DESCRIPTION_LIST &#x3D;</span><br><span class="line">    (DESCRIPTION &#x3D;</span><br><span class="line">      (ADDRESS &#x3D; (PROTOCOL &#x3D; IPC)(KEY &#x3D; EXTPROC1521))</span><br><span class="line">      (ADDRESS &#x3D; (PROTOCOL &#x3D; TCP)(HOST &#x3D; 192.168.10.194)(PORT &#x3D; 1521))  #oracle主机和监听的端口</span><br><span class="line">    )</span><br><span class="line">  )</span><br><span class="line"></span><br><span class="line">SID_LIST_LISTENER &#x3D;  </span><br><span class="line">(SID_LIST &#x3D;  </span><br><span class="line">  (SID_DESC &#x3D;  </span><br><span class="line">  (GLOBAL_DBNAME &#x3D; dbabd)  #数据库实例的GDBNAME和SID</span><br><span class="line">  (SID_NAME &#x3D; dbabd)</span><br><span class="line">  )</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">ADR_BASE_LISTENER &#x3D; &#x2F;data&#x2F;app&#x2F;oracle</span><br></pre></td></tr></table></figure>
+
+<p>tnsnames.ora的内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># tnsnames.ora Network Configuration File: &#x2F;data&#x2F;app&#x2F;oracle&#x2F;product&#x2F;11.2.0&#x2F;db_1&#x2F;network&#x2F;admin&#x2F;tnsnames.ora</span><br><span class="line"># Generated by Oracle configuration tools.</span><br><span class="line"></span><br><span class="line">DBABD &#x3D;</span><br><span class="line">  (DESCRIPTION &#x3D;</span><br><span class="line">    (ADDRESS &#x3D; (PROTOCOL &#x3D; TCP)(HOST &#x3D; 192.168.10.194)(PORT &#x3D; 1521))</span><br><span class="line">    (CONNECT_DATA &#x3D;</span><br><span class="line">      (SERVER &#x3D; DEDICATED)</span><br><span class="line">      (SERVICE_NAME &#x3D; dbabd)   # 要登陆的数据实例名</span><br><span class="line">    )</span><br><span class="line">  )</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查看监听配置是否成功</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">lsnrctl stop </span><br><span class="line">lsnrctl start</span><br><span class="line">lsnrctl status</span><br></pre></td></tr></table></figure>
+
+<h2 id="oracle创建实例"><a href="#oracle创建实例" class="headerlink" title="oracle创建实例"></a>oracle创建实例</h2><ul>
+<li>新建建库响应文件配置信息</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd &#x2F;tmp&#x2F;database&#x2F;response&#x2F;</span><br><span class="line">vi db.rsp</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>设置db.rsp的内容为：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[GENERAL]</span><br><span class="line">RESPONSEFILE_VERSION &#x3D; &quot;11.2.0&quot;</span><br><span class="line">OPERATION_TYPE &#x3D; &quot;createDatabase&quot;</span><br><span class="line">[CREATEDATABASE]</span><br><span class="line">GDBNAME &#x3D; &quot;dbabd&quot;</span><br><span class="line">SID &#x3D; &quot;dbabd&quot;           </span><br><span class="line">#SID等于&#x2F;home&#x2F;oracle&#x2F;.bash_profile的ORACLE_SID的值</span><br><span class="line">TEMPLATENAME &#x3D; &quot;General_Purpose.dbc&quot;</span><br><span class="line">SYSPASSWORD &#x3D; &quot;oracle&quot;</span><br><span class="line">SYSTEMPASSWORD &#x3D; &quot;oracle&quot;</span><br><span class="line">DATAFILEDESTINATION &#x3D;&#x2F;data&#x2F;app&#x2F;oracle&#x2F;oradata</span><br><span class="line">RECOVERYAREADESTINATION&#x3D;&#x2F;data&#x2F;app&#x2F;oracle&#x2F;fast_recovery_area</span><br><span class="line">CHARACTERSET &#x3D; &quot;AL32UTF8&quot;</span><br><span class="line">TOTALMEMORY &#x3D; &quot;6144&quot;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>启用配置，以静默方式建立新库和实例</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dbca -silent -responseFile db.rsp</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>检查是否创立新实例</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -ef | grep ora_ | grep -v grep</span><br></pre></td></tr></table></figure>
+<ul>
+<li>监听数据库</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">lsnrctl status</span><br><span class="line">sqlplus &#x2F; as sysdba</span><br><span class="line">alter system register;</span><br><span class="line">quit</span><br><span class="line">lsnrctl stop</span><br><span class="line">lsnrctl start</span><br></pre></td></tr></table></figure>
+<p><img src="img/3.4.png" alt="12"><br><img src="img/3.5.png" alt="12"></p>
+<h2 id="Oracle和监听器手动启动"><a href="#Oracle和监听器手动启动" class="headerlink" title="Oracle和监听器手动启动"></a>Oracle和监听器手动启动</h2><ul>
+<li>Oracle手动启动</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">su - oracle</span><br><span class="line">sqlplus / as sysdba</span><br><span class="line">startup     # 启动Oracle</span><br><span class="line">shutdown    # 停止Oracle</span><br></pre></td></tr></table></figure>
+<ul>
+<li>监听器手动启动</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">lsnrctl start</span><br><span class="line">lsnrctl stop</span><br><span class="line">lsnrctl status</span><br></pre></td></tr></table></figure>
+<h2 id="配置EM企业管理器（EMCA）"><a href="#配置EM企业管理器（EMCA）" class="headerlink" title="配置EM企业管理器（EMCA）"></a>配置EM企业管理器（EMCA）</h2><ul>
+<li>查看和编辑ORACLE_UNQNAME环境变量</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">su - oracle</span><br><span class="line">env|grep ORACLE_UNQNAME</span><br><span class="line">vi &#x2F;home&#x2F;oracle&#x2F;.bash_profile</span><br><span class="line">export ORACLE_UNQNAME&#x3D;$ORACLE_SID</span><br><span class="line">source &#x2F;home&#x2F;oracle&#x2F;.bash_profile     #使配置生效</span><br><span class="line">env|grep ORACLE_UNQNAME</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查看EM控制台服务的状态</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">emctl status dbconsole</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>删除EM资料库</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">emca -repos drop</span><br></pre></td></tr></table></figure>
+<p><img src="img/3.6.png" alt="12"></p>
+<ul>
+<li>创建EM资料库</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">emca -repos create</span><br></pre></td></tr></table></figure>
+<p><img src="img/3.7.png" alt="12"></p>
+<ul>
+<li>配置EM控制台</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">emca -config dbcontrol db</span><br></pre></td></tr></table></figure>
+
+<p><img src="img/3.8.png" alt="12"></p>
+<ul>
+<li>检查<code>1158</code>端口是否开放，不开放则开放</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --query-port&#x3D;1158&#x2F;tcp    #查看是否开放</span><br><span class="line">firewall-cmd --permanent --add-port&#x3D;1158&#x2F;tcp    开放端口</span><br><span class="line">service firewalld restart</span><br></pre></td></tr></table></figure>
+<ul>
+<li>访问地址<code>http://ip:1158/em</code>,输入用户名<code>sys</code>,密码<code>oracle</code>,身份是管理员</li>
+</ul>
+<p><img src="img/3.9.png" alt="12">  </p>
+<p><img src="img/3.10.png" alt="12"></p>
+<h2 id="oracle和监听器、EM开机自启动"><a href="#oracle和监听器、EM开机自启动" class="headerlink" title="oracle和监听器、EM开机自启动"></a>oracle和监听器、EM开机自启动</h2><ul>
+<li>检查状态：  </li>
+</ul>
+<p><img src="img/2.1.png" alt="12"></p>
+<ul>
+<li>编辑oratab文件:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi &#x2F;etc&#x2F;oratab</span><br></pre></td></tr></table></figure>
+
+<p>修改：<code>orcl:/u01/app/oracle/product/11.2.0/db_1:N</code>为<code>orcl:/u01/app/oracle/product/11.2.0/db_1:Y</code>(第一个区域的值是sid,第二个区域的值是数据库主目录，第三个区域的值Y或N指定你是否想要dbstart和dbshut脚本启动并关闭数据库)</p>
+<p><img src="img/2.4.png" alt="12"></p>
+<ul>
+<li>创建文件</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi oracle.service</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>编辑oracle.service文件内容</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description&#x3D;oracle</span><br><span class="line">After&#x3D;multi-user.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type&#x3D;forking</span><br><span class="line">ExecStart&#x3D;&#x2F;data&#x2F;app&#x2F;oracle&#x2F;bin&#x2F;oracle.sh</span><br><span class="line">ExecStop&#x3D;&#x2F;data&#x2F;app&#x2F;oracle&#x2F;product&#x2F;11.2.0&#x2F;db_1&#x2F;bin&#x2F;dbshut</span><br><span class="line">User&#x3D;oracle</span><br><span class="line">Group&#x3D;oinstall</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy&#x3D;multi-user.target</span><br></pre></td></tr></table></figure>
+
+<p><img src="img/2.3.png" alt="12"></p>
+<ul>
+<li>添加权限</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chmod +754 oracle.service</span><br><span class="line">cp oracle.service &#x2F;usr&#x2F;lib&#x2F;systemd&#x2F;system&#x2F;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>创建一个脚本</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd &#x2F;data&#x2F;app&#x2F;oracle&#x2F;</span><br><span class="line">mkdir bin</span><br><span class="line">cd bin</span><br><span class="line">vi oracle.sh</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>添加脚本内容</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#!&#x2F;bin&#x2F;sh</span><br><span class="line">source &#x2F;home&#x2F;oracle&#x2F;.bash_profile</span><br><span class="line"></span><br><span class="line">&#x2F;data&#x2F;app&#x2F;oracle&#x2F;product&#x2F;11.2.0&#x2F;db_1&#x2F;bin&#x2F;dbstart</span><br><span class="line">&#x2F;data&#x2F;app&#x2F;oracle&#x2F;product&#x2F;11.2.0&#x2F;db_1&#x2F;bin&#x2F;lsnrctl start</span><br><span class="line">&#x2F;data&#x2F;app&#x2F;oracle&#x2F;product&#x2F;11.2.0&#x2F;db_1&#x2F;bin&#x2F;emctl start dbconsole</span><br></pre></td></tr></table></figure>
+
+<p><img src="img/2.2.png" alt="12"></p>
+<ul>
+<li>开启开机启动</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chmod +x oracle.sh </span><br><span class="line">systemctl enable oracle.service</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>开机后查看是否启动成功</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">su - oracle</span><br><span class="line">lsnrctl status</span><br></pre></td></tr></table></figure>
+
+<p><img src="img/2.5.png" alt="12">  </p>
+<p>过约2分钟后</p>
+<p><img src="img/2.6.png" alt="12"></p>
+<h2 id="PL-SQL连接远程Oracle服务和创建用户"><a href="#PL-SQL连接远程Oracle服务和创建用户" class="headerlink" title="PL/SQL连接远程Oracle服务和创建用户"></a>PL/SQL连接远程Oracle服务和创建用户</h2><ul>
+<li><p>下载、安装sqldeveloper和64bite客户端程序</p>
+</li>
+<li><p>修改sqldeveloper的configure-&gt;preference的Oracle home和Oci library属性为客户端解压目录<br><img src="img/3.1.png" alt="12"></p>
+</li>
+<li><p>用pl/sql登录system用户</p>
+</li>
+</ul>
+<p><img src="img/3.2.png" alt="12"></p>
+<ul>
+<li>新建查询sql语句`file-&gt;new-&gt;sql windows</li>
+<li>创建用户</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">--创建表空间</span><br><span class="line">create tablespace hongmeng</span><br><span class="line">datafile &#39;&#x2F;home&#x2F;oracle&#x2F;hongmeng.dbf&#39;</span><br><span class="line">size 100m</span><br><span class="line">autoextend on</span><br><span class="line">next 10m;</span><br><span class="line">--创建用户</span><br><span class="line">create user hm</span><br><span class="line">identified by hongmeng</span><br><span class="line">default tablespace hongmeng</span><br><span class="line"></span><br><span class="line">--Oracle数据库常用的角色介绍</span><br><span class="line">connect ---连接角色，基本角色</span><br><span class="line">resource ---开发者角色</span><br><span class="line">dba --- 超级管理员角色</span><br><span class="line"></span><br><span class="line">--给hm用户授权,执行创表、创建用户、授权操作</span><br><span class="line">grant dba to hm；</span><br></pre></td></tr></table></figure>
+
+<p><img src="img/3.3.png" alt="12"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/08/19/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/08/19/oracle%E5%AE%89%E8%A3%85/" rel="prev" title="oracle安装">
+                oracle安装 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/%E5%BE%AE%E4%BF%A1.jpg"
+                alt="淡竹浓啡" />
+            
+              <p class="site-author-name" itemprop="name">淡竹浓啡</p>
+              <p class="site-description motion-element" itemprop="description">人是往前走的</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#oracle配置监听"><span class="nav-number">1.</span> <span class="nav-text">oracle配置监听</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#oracle创建实例"><span class="nav-number">2.</span> <span class="nav-text">oracle创建实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Oracle和监听器手动启动"><span class="nav-number">3.</span> <span class="nav-text">Oracle和监听器手动启动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置EM企业管理器（EMCA）"><span class="nav-number">4.</span> <span class="nav-text">配置EM企业管理器（EMCA）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#oracle和监听器、EM开机自启动"><span class="nav-number">5.</span> <span class="nav-text">oracle和监听器、EM开机自启动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PL-SQL连接远程Oracle服务和创建用户"><span class="nav-number">6.</span> <span class="nav-text">PL&#x2F;SQL连接远程Oracle服务和创建用户</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">淡竹浓啡</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
